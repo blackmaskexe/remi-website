@@ -1,10 +1,11 @@
 import Hero from "@/components/Hero";
+import StatsSection from "@/components/StatsSection";
 
 export default function Home() {
   return (
     <main className="no-scrollbar">
       <Hero />
-      {/* Subsequent sections: Stats, Features, Roadmap will go here */}
+      <StatsSection />
     </main>
   );
 }

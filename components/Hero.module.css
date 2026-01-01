@@ -137,21 +137,21 @@
 
 /* 
    Overlay System 
-   Positioned at the top right corner, slightly floating off-center for a modern look
+   Positioned at the top center, slightly floating above
 */
 .overlayContainer {
   position: absolute;
   top: -25px;
-  right: -20px;
-  left: auto;
-  transform: none; /* Remove centering transform */
-  width: auto; /* Allow auto width */
+  left: 50%;
+  transform: translateX(-50%);
+  right: auto;
+  width: auto;
   min-width: 250px;
   height: 60px;
   z-index: 10;
   pointer-events: none;
   display: flex;
-  justify-content: flex-end; /* Align content right */
+  justify-content: center; /* Align content center */
   align-items: center;
 }
 

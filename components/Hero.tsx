@@ -29,7 +29,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className={styles.heroSection}>
+    <section id="hero" className={styles.heroSection}>
       <div className={styles.heroBackground}></div>
       
       <div className={styles.textContent}>
@@ -44,7 +44,14 @@ const Hero = () => {
         </p>
         
         <div className={styles.ctaGroup}>
-          <button className={styles.primaryBtn}>Explore the Tech</button>
+          <button 
+            className={styles.primaryBtn}
+            onClick={() => {
+              document.getElementById('stats')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Explore More
+          </button>
           <button className={styles.secondaryBtn}>Watch Demo</button>
         </div>
       </div>

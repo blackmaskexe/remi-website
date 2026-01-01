@@ -1,0 +1,292 @@
+.heroSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90vh;
+  padding: 0 var(--container-padding);
+  max-width: var(--container-width);
+  margin: 0 auto;
+  position: relative;
+  overflow: visible; /* Changed to allow floating elements if needed */
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 80% 20%, rgba(48, 164, 108, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 10% 80%, rgba(249, 249, 245, 1) 0%, transparent 50%);
+}
+
+.textContent {
+  flex: 1;
+  max-width: 550px;
+  z-index: 2;
+}
+
+.visualContent {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  /* Ensure we have space above for the popup */
+  padding-top: 80px; 
+}
+
+/* Typography & Animations */
+.tagline {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.headline {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.highlight {
+  color: var(--primary-color);
+}
+
+.subheadline {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.primaryBtn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.primaryBtn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  background-color: transparent;
+  color: var(--text-dark);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  border: 1px solid rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.secondaryBtn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+/* Image/Visual Area */
+.imageContainer {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  /* Removed simple fadeScale animation here to handle it in JS/Logic or specific class */
+}
+
+.imageWrapper {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: enterImage 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* 
+   Overlay System 
+   Positioned at the top right corner, slightly floating off-center for a modern look
+*/
+.overlayContainer {
+  position: absolute;
+  top: -25px;
+  right: -20px;
+  left: auto;
+  transform: none; /* Remove centering transform */
+  width: auto; /* Allow auto width */
+  min-width: 250px;
+  height: 60px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  justify-content: flex-end; /* Align content right */
+  align-items: center;
+}
+
+/* STATE 1: PROCESSING */
+.processingState {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 0.6rem 1.2rem;
+  border-radius: 30px;
+  border: 1px solid rgba(48, 164, 108, 0.3);
+  box-shadow: 0 8px 32px rgba(48, 164, 108, 0.15);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.processingIcon {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--primary-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.processingText {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* STATE 2: RESULT */
+.resultState {
+  background: var(--bg-white);
+  padding: 0.8rem 1.2rem;
+  border-radius: 20px; /* Uniform border radius */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  width: auto;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.resultIcon {
+  width: 36px;
+  height: 36px;
+  background: #E8F5E9; /* Light green bg */
+  color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.resultText {
+  display: flex;
+  flex-direction: column;
+}
+
+.resultTitle {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.resultName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes enterImage {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heroSection {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 4rem;
+  }
+  
+  .textContent {
+    margin-bottom: 5rem; /* More space for the pushed down image */
+  }
+  
+  .ctaGroup {
+    justify-content: center;
+  }
+  
+  .headline {
+    font-size: 2.5rem;
+  }
+  
+  .visualContent {
+    width: 100%;
+    padding-top: 60px;
+  }
+  
+  .overlayContainer {
+    top: -40px;
+  }
+}
